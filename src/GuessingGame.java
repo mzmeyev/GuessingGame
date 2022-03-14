@@ -1,29 +1,36 @@
 package src;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class GuessingGame {
     public static void main(String[] args) {
-        int numberToGuess = 1;
-        int guess;
-        Scanner input = new Scanner(System.in);
-        Boolean win = false;
 
-        while(win == false){
-            System.out.println("Guess a number between 0 and 2: ");
-            guess = input.nextInt();
+        Scanner in = new Scanner(System.in);
+        Random rand = new Random();
+        int randNum = 0;
+        int max = 100;
+        int min = 1;
+        String myAnswer = "";
 
-            if (guess == numberToGuess) {
-                win = true;
-            } else if (guess == 2) {
-                System.out.println("The number you have guessed is bigger");
-            } else if (guess == 0) {
-                System.out.println("The number you have guessed is smaller");
+        do {
+            randNum = rand.nextInt(max - min + 1) + min;
+            System.out.println("The number you guessed  is " + randNum + "?");
+            System.out.println("Please select your answer: ");
+            System.out.println("0 – correct, 1 –  bigger, 2 – smaller");
+            myAnswer = in.nextLine();
+
+            if(myAnswer.equals("1")) {
+                min = randNum + 1;
             }
+            else if(myAnswer.equals("2")) {
+                max = randNum - 1;
+            }
+        }while(!myAnswer.equals("0"));
 
-        }
-        System.out.println("You win!");
-        System.out.println("The correct number was: " + numberToGuess);
+        in.close();
+        System.out.println("Hahahah I win!!!");
     }
-
 }
+
+
